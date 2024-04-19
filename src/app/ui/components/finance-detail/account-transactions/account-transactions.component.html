@@ -1,0 +1,76 @@
+<div class="row">
+<dx-tab-panel>
+   
+    <dxi-item title="Stok H." template="invoiceDetail"></dxi-item>
+    <div *dxTemplate="let ordersTabItem of 'invoiceDetail'">
+      <dx-form labelLocation="top" class="form-container">
+        <!-- <dxi-item template="productSelectBox">
+          <dxo-label text="Product"></dxo-label>
+        </dxi-item>
+        <div *dxTemplate="let selectBoxItem of 'productSelectBox'">
+          <dx-select-box
+            [value]="productIdBySupplier"
+            [dataSource]="productsData"
+            [inputAttr]="{ 'aria-label': 'Product' }"
+            [deferRendering]="false"
+            valueExpr="ProductID"
+            displayExpr="ProductName"
+            (onValueChanged)="handleValueChange($event)"
+          >
+          </dx-select-box>
+        </div> -->
+  
+        <dxi-item template="detailInvoice">
+          <!-- <dxo-label text="Order History"></dxo-label> -->
+        </dxi-item>
+        <div *dxTemplate="let order of 'detailInvoice'">
+          <dx-data-grid [dataSource]="detailInvoiceData" [showBorders]="true">
+            <dxo-paging  [enabled]="true"></dxo-paging>
+  
+            <dxi-column dataField="stockMovementQuantity"  caption="Miktar"></dxi-column>
+            <dxi-column dataField="stockIn_Out" caption="G/C"></dxi-column>
+            <dxi-column dataField="date" dataType="date" caption="Tarih"></dxi-column>
+            <dxi-column dataField="productNetPrice"  caption="Net F." > <dxo-format type="currency"  [precision]="5" currency="TRY"></dxo-format></dxi-column>
+            <dxi-column dataField="productGrossPrice"   caption="Brüt F." ><dxo-format type="currency"  [precision]="5" currency="TRY"></dxo-format></dxi-column>
+            <dxi-column dataField="warehouseCode" caption="Depo" ></dxi-column>      
+  
+            <!-- <dxo-summary>
+              <dxi-total-item column="UnitPrice" summaryType="sum">
+                <dxo-value-format
+                  format="currency"
+                  [precision]="2"
+                ></dxo-value-format>
+              </dxi-total-item>
+              <dxi-total-item
+                column="Quantity"
+                summaryType="count"
+              ></dxi-total-item>
+            </dxo-summary> -->
+          </dx-data-grid>
+        </div>
+      </dx-form>
+    </div>
+    <!-- <dxi-item title="Address" template="addressTab"></dxi-item>  ORDERS'IN YANINA 2.BIR KOLON EKLEMEK ICIN
+    <div *dxTemplate="let addressTabItem of 'addressTab'">
+      <dx-form
+        [formData]="rowData"
+        [colCount]="2"
+        [customizeItem]="customizeItemTemplate"
+        class="address-form form-container"
+      >
+        <dxi-item dataField="Address"></dxi-item>
+        <dxi-item dataField="City"></dxi-item>
+        <dxi-item dataField="Region"></dxi-item>
+        <dxi-item dataField="PostalCode"></dxi-item>
+        <dxi-item dataField="Country"></dxi-item>
+        <dxi-item dataField="Phone"></dxi-item>
+  
+        <div *dxTemplate="let item of 'formItem'">
+          <span>{{ item.editorOptions.value }}</span>
+        </div>
+      </dx-form>
+    </div> -->
+  </dx-tab-panel>
+</div>
+ 
+  

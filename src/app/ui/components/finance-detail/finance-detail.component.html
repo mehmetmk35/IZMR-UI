@@ -1,0 +1,61 @@
+<div class="row">
+<div class="demo-container">
+<dx-data-grid
+  id="gridContainer"
+  [dataSource]="suppliersData"
+  [remoteOperations]="true"
+  [showBorders]="true"
+  
+>
+  <!-- <dxo-paging [pageSize]="10"   [pageIndex]="1"></dxo-paging> -->
+  <dxo-paging [enabled]="false"   ></dxo-paging>  
+  <dxi-column dataField="invoiceNumber"  caption="Fatura Numarası"></dxi-column>
+  <dxi-column dataField="customerCode"   caption="Cari Kod"></dxi-column>
+  <dxi-column dataField="customerName"   caption="Cari İsim"></dxi-column>
+  <dxi-column dataField="date"           caption="Tarih"></dxi-column>   
+  <dxi-column dataField="itemCount"      caption="Kalem Adeti" ></dxi-column>
+  <dxi-column dataField="totalAmount"    caption="Genel Toplam " ></dxi-column>
+  <dxo-master-detail
+    [enabled]="true"
+    template="masterDetail"
+  ></dxo-master-detail>
+
+  <div *dxTemplate="let masterDetailItem of 'masterDetail'">
+    <app-account-transactions
+      [invoiceNumber]="masterDetailItem.key.invoiceNumber"
+      
+    ></app-account-transactions>
+  </div>
+</dx-data-grid>
+</div>
+</div>
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link">
+            {{currentPageNo}}/{{totalPageCount}}
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" [routerLink]="['/financeDetail', currentPageNo - 1 <= 0 ? 1 : currentPageNo - 1]">
+            Önceki
+          </a>
+        </li>
+        <li class="page-item" *ngFor="let pageNo of pageList;" routerLinkActive="active">
+          <a class="page-link" [routerLink]="['/financeDetail', pageNo]">
+            {{pageNo}}
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" [routerLink]="['/financeDetail', currentPageNo + 1 >= totalPageCount ? totalPageCount : currentPageNo + 1]">
+            Sonraki
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="col-md-3"></div>
+</div>
